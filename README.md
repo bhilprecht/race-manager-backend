@@ -34,7 +34,7 @@ Abgrenzung
 MockUps
 
 ![Events](https://github.com/benni1371/mobileProjectBackend/blob/master/img/events.png)
-![Fahrtzeiten](https://github.com/benni1371/mobileProjectBackend/blob/master/img/fahrtzeiten.png)
+![Fahrtzeiten](https://github.com/benni1371/mobileProjectBackend/blob/master/img/fahrzeiten.png)
 ![Rennplanung](https://github.com/benni1371/mobileProjectBackend/blob/master/img/rennplanung.png)
 ![Team Beitreten](https://github.com/benni1371/mobileProjectBackend/blob/master/img/team_beitreten.png)
 ![Team Verwalten](https://github.com/benni1371/mobileProjectBackend/blob/master/img/team_verwalten.png)
