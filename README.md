@@ -10,7 +10,7 @@ Deshalb müssen die Einsätze der Fahrer vorher geplant werden. Außerdem muss a
 
 Diese App soll die Fahrerplanung ermöglichen und aus der aktualisierten Fahrerplanung am Ende automatisch ein Fahrtenprotokoll ausgeben.
 
-Funktionen
+## Funktionen
 
 - Verwaltung des Teams und der Veranstaltungen
 - Planen des Fahrereinsatzes
@@ -18,20 +18,20 @@ Funktionen
 - Minimal- und Maximalzeiten sollen angezeigt werden
 - Am Ende soll ein Protokoll ausgegeben werden
 
-Mobile-Funktionalitäten
+## Mobile-Funktionalitäten
 
 - Keine vollwertige Userverwaltung sondern Authentifizierung über Geräte-ID
 - Sharing über Deep-Links
 - ggf. Push-Notifications, falls man bald fahren muss und bei Änderungen
 
-Abgrenzung
+## Abgrenzung
 
 - keine Gewichtsplanung für Karts
 - keine Rennsimulation (Spritverbrauch)
 - keine strategischen Prognosen
 - kein GPS-Tracking oder Tracken von Rundenzeiten (gibt es schon)
 
-MockUps
+## MockUps
 
 ![Events](https://github.com/benni1371/mobileProjectBackend/blob/master/img/events.png)
 ![Fahrtzeiten](https://github.com/benni1371/mobileProjectBackend/blob/master/img/fahrzeiten.png)
