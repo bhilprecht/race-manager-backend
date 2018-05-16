@@ -1,0 +1,23 @@
+{
+  "name": "mobileprojectbackend",
+  "version": "1.0.0",
+  "description": "RaceManager Backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benni1371/mobileProjectBackend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benni1371/mobileProjectBackend/issues"
+  },
+  "homepage": "https://github.com/benni1371/mobileProjectBackend#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
