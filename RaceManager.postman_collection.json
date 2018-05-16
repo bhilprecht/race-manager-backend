@@ -1,0 +1,652 @@
+{
+	"info": {
+		"name": "RaceManager",
+		"_postman_id": "1dac48e4-327a-0227-660f-103ae2bc2af4",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Team",
+			"description": "",
+			"item": [
+				{
+					"name": "Add Team",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"needracing\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/team",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"team"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Teams",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:3000/team",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"team"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Team",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:3000/team/5afc2d385f617c46b84e089e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"team",
+								"5afc2d385f617c46b84e089e"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Team",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/team/5afc1a09d4d69548bcf408a5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"team",
+								"5afc1a09d4d69548bcf408a5"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Person",
+			"description": "",
+			"item": [
+				{
+					"name": "Add User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Philipp\",\n\t\"connectedViaDevice\": true,\n\t\"driver\": false\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/team/5afc2d385f617c46b84e089e/person",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"team",
+								"5afc2d385f617c46b84e089e",
+								"person"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Add Driver",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Philipp\",\n\t\"connectedViaDevice\": false,\n\t\"driver\": true\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/team/5afc2d385f617c46b84e089e/person",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"team",
+								"5afc2d385f617c46b84e089e",
+								"person"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Person",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:3000/team/5afc2d385f617c46b84e089e/person/5afc3163e182d84604e84a59",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"team",
+								"5afc2d385f617c46b84e089e",
+								"person",
+								"5afc3163e182d84604e84a59"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Persons",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:3000/team/5afc2d385f617c46b84e089e/person",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"team",
+								"5afc2d385f617c46b84e089e",
+								"person"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Drivers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:3000/team/5afc2d385f617c46b84e089e/person?driver=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"team",
+								"5afc2d385f617c46b84e089e",
+								"person"
+							],
+							"query": [
+								{
+									"key": "driver",
+									"value": "true",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Person",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:3000/team/5afc2d385f617c46b84e089e/person/5afc2d425f617c46b84e089f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"team",
+								"5afc2d385f617c46b84e089e",
+								"person",
+								"5afc2d425f617c46b84e089f"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update Person",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"updatedName\",\n\t\"minutesBeforeNotification\":2,\n\t\"notificationId\":\"1234\",\n\t\"driver\":true,\n\t\"connectedViaDevice\":false,\n\t\"color\":\"#000\",\n\t\"avatarNo\":42\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/team/5afc2d385f617c46b84e089e/person/5afc2d425f617c46b84e089f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"team",
+								"5afc2d385f617c46b84e089e",
+								"person",
+								"5afc2d425f617c46b84e089f"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "b909c973-ccc4-4a6f-b31c-35d232aaf56f",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "185167b3-7ee5-407c-a265-c72fce647401",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Event",
+			"description": "",
+			"item": [
+				{
+					"name": "Add Event",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"name\":\"Nürnburgringcup\",\r\n\t\"startdate\":\"June 17, 2018 08:00:00\",\r\n\t\"location\":\"Nürburgring\",\r\n\t\"noRaceDays\":2\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/team/5afc2d385f617c46b84e089e/event",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"team",
+								"5afc2d385f617c46b84e089e",
+								"event"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Events",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:3000/team/5afc2d385f617c46b84e089e/event",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"team",
+								"5afc2d385f617c46b84e089e",
+								"event"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Event",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:3000/team/5afc2d385f617c46b84e089e/event/5afc7b8b056174269c51336f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"team",
+								"5afc2d385f617c46b84e089e",
+								"event",
+								"5afc7b8b056174269c51336f"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Event",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:3000/team/5afc2d385f617c46b84e089e/event/5afc7d3e8c9d0e0a5c50ba93",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"team",
+								"5afc2d385f617c46b84e089e",
+								"event",
+								"5afc7d3e8c9d0e0a5c50ba93"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update Event",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\" : \"UpdatedName\",\n\t\"startdate\" : \"2018-05-17T06:00:00.000Z\",\n\t\"location\" : \"UpdatedLoc\",\n\t\"noRaceDays\" : 3,\n\t\"pictureNo\" : 2\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/team/5afc2d385f617c46b84e089e/event/5afc7cf5cdd9d63e38b5cc11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"team",
+								"5afc2d385f617c46b84e089e",
+								"event",
+								"5afc7cf5cdd9d63e38b5cc11"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Stint",
+			"description": "",
+			"item": [
+				{
+					"name": "Add Stint",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"orderNo\" : 2,\n\t\"driverId\" : \"5afc357af82d2456ecb82c81\",\n\t\"startdate\" : \"June 17, 2018 08:00:00\",\n\t\"enddate\" : \"June 17, 2018 08:10:00\",\n\t\"raceDay\" : 1,\n\t\"finished\" : true,\n\t\"isBreak\" : false\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/team/5afc2d385f617c46b84e089e/event/5afc7d3e8c9d0e0a5c50ba93/stint",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"team",
+								"5afc2d385f617c46b84e089e",
+								"event",
+								"5afc7d3e8c9d0e0a5c50ba93",
+								"stint"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Stints",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:3000/team/5afc2d385f617c46b84e089e/event/5afc7d3e8c9d0e0a5c50ba93/stint",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"team",
+								"5afc2d385f617c46b84e089e",
+								"event",
+								"5afc7d3e8c9d0e0a5c50ba93",
+								"stint"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Stint",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:3000/team/5afc2d385f617c46b84e089e/event/5afc7d3e8c9d0e0a5c50ba93/stint/5afc91285d62f146c0eef0fe",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"team",
+								"5afc2d385f617c46b84e089e",
+								"event",
+								"5afc7d3e8c9d0e0a5c50ba93",
+								"stint",
+								"5afc91285d62f146c0eef0fe"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Stint",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:3000/team/5afc2d385f617c46b84e089e/event/5afc7d3e8c9d0e0a5c50ba93/stint/5afc8f6d12b6423198d2951b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"team",
+								"5afc2d385f617c46b84e089e",
+								"event",
+								"5afc7d3e8c9d0e0a5c50ba93",
+								"stint",
+								"5afc8f6d12b6423198d2951b"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update Stint",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"orderNo\" : 3,\n\t\"driverId\" : \"5afc357af82d2456ecb82c81\",\n\t\"startdate\" : \"June 15, 2018 08:00:00\",\n\t\"enddate\" : \"June 15, 2018 08:10:00\",\n\t\"raceDay\" : 2,\n\t\"finished\" : false,\n\t\"isBreak\" : true\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/team/5afc2d385f617c46b84e089e/event/5afc7d3e8c9d0e0a5c50ba93/stint/5afc91285d62f146c0eef0fe",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"team",
+								"5afc2d385f617c46b84e089e",
+								"event",
+								"5afc7d3e8c9d0e0a5c50ba93",
+								"stint",
+								"5afc91285d62f146c0eef0fe"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Heartbeat",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqdWxpYW5yZWljaHdhbGQiLCJpc3MiOiJESEJXIE1hbm5oZWltIFZvcmxlc3VuZ3NwbGFuIE1hbmFnZXIiLCJhdWQiOiJBRE1JTiIsImV4cCI6MTUxNTMxOTYzMSwiaWF0IjoxNTE1MjMzMjMxfQ.mQoUcW8Sp4abgz2iOdVEhkZa1vfnFcfNDtXthHPxxSg"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3000/heartbeat",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"heartbeat"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

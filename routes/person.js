@@ -2,6 +2,7 @@
 var mongoose = require('mongoose'),
     app = require('../index').app,
     Team = require("../models/team"),
+    randomColor = require('randomcolor'),
     Person = mongoose.model('Person', require("../models/person"));
 
 app.post('/team/:teamId/person', function(req, res){
@@ -18,11 +19,10 @@ app.post('/team/:teamId/person', function(req, res){
         person.name = req.body.name;
         if (req.body.minutesBeforeNotification)
             person.minutesBeforeNotification = req.body.minutesBeforeNotification
-        person.driver = req.body.driver
-        person.connectedViaDevice = req.body.connectedViaDevice
-        //Todo: random
-        person.avatarNo = 1
-        person.color = '#fff'
+        person.driver = req.body.driver;
+        person.connectedViaDevice = req.body.connectedViaDevice;
+        person.avatarNo = Math.floor(Math.random() * 8);
+        person.color = randomColor();
 
         team.members.push(person);
 
@@ -30,7 +30,7 @@ app.post('/team/:teamId/person', function(req, res){
         team.save(function(err) {
             if (err)
                 return res.status(400).send(err);
-            res.json({ message: 'person posted!' });
+            res.json(person);
         });
     });
 });
@@ -99,6 +99,6 @@ app.put('/team/:teamId/person/:personId', function(req, res){
 
         team.save();   
 
-        res.json({ message: 'person updated!' });         
+        res.json(person);         
     });
 });

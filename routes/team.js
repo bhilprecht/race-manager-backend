@@ -14,6 +14,17 @@ app.get('/team', function(req, res){
     })
 });
 
+app.get('/team/:teamId', function(req, res){
+
+    Team.findById(req.params.teamId, function(err, team) {
+        
+        if (err || !team)
+            return res.status(400).send({message: 'Error: Team not found'});
+
+        res.json(team)
+    });
+});
+
 app.post('/team', function(req, res){
 
     var team = new Team();
@@ -25,7 +36,7 @@ app.post('/team', function(req, res){
         if (err){
             res.send(err);
         }
-        res.json({ message: 'created!' });
+        res.json(team);
     });
 });
 
@@ -36,6 +47,6 @@ app.delete('/team/:teamId', function(req, res){
         if (err || !team)
             return res.status(400).send({message: 'Error: Id not found'});
     
-        res.json({ message: 'deleted!' });
+        res.json({ message: 'deleted' });
     });
 });

@@ -24,6 +24,8 @@ mongoose.connect(mongoUrl).then(function(){
 require('./routes/heartbeat');
 require('./routes/team');
 require('./routes/person');
+require('./routes/event');
+require('./routes/stint');
 
 app.listen(process.env.PORT || 3000, function(){
     console.log('Listening on port 3000!');

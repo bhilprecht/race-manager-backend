@@ -20,6 +20,7 @@
   "dependencies": {
     "crypto": "^1.0.1",
     "express": "^4.16.3",
-    "mongoose": "^5.1.1"
+    "mongoose": "^5.1.1",
+    "randomcolor": "^0.5.3"
   }
 }
