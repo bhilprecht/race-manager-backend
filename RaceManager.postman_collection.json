@@ -488,7 +488,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"orderNo\" : 2,\n\t\"driverId\" : \"5afc357af82d2456ecb82c81\",\n\t\"startdate\" : \"June 17, 2018 08:00:00\",\n\t\"enddate\" : \"June 17, 2018 08:10:00\",\n\t\"raceDay\" : 1,\n\t\"finished\" : true,\n\t\"isBreak\" : false\n}"
+							"raw": "{\n\t\"orderNo\" : 2,\n\t\"driverId\" : \"5afc2d425f617c46b84e089f\",\n\t\"startdate\" : \"June 17, 2018 08:30:00\",\n\t\"enddate\" : \"June 17, 2018 08:45:00\",\n\t\"raceDay\" : 1,\n\t\"finished\" : true,\n\t\"isBreak\" : false\n}"
 						},
 						"url": {
 							"raw": "http://localhost:3000/team/5afc2d385f617c46b84e089e/event/5afc7d3e8c9d0e0a5c50ba93/stint",
@@ -614,6 +614,44 @@
 								"5afc7d3e8c9d0e0a5c50ba93",
 								"stint",
 								"5afc91285d62f146c0eef0fe"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Stats",
+			"description": "",
+			"item": [
+				{
+					"name": "Get Driver Stats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:3000/team/5afc2d385f617c46b84e089e/event/5afc7d3e8c9d0e0a5c50ba93/driver_stats?finished=false",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"team",
+								"5afc2d385f617c46b84e089e",
+								"event",
+								"5afc7d3e8c9d0e0a5c50ba93",
+								"driver_stats"
+							],
+							"query": [
+								{
+									"key": "finished",
+									"value": "false",
+									"equals": true
+								}
 							]
 						},
 						"description": ""

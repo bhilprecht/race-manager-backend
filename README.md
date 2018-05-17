@@ -1,5 +1,7 @@
 # RaceManager
 
+UPDATE: posted on heroku: https://racemanager-mobile-project.herokuapp.com
+
 Bei Langstreckenkartrennen treten verschiedene Teams mit mehreren Fahrern pro Kart an, um Rennen zwischen 6 und 24h zu absolvieren. Dabei müssen für den Fahrereinsatz bestimmte Regeln erfüllt sein. Dazu gehören
 - Maximale und minimale Fahrtzeiten pro Fahrereinsatz (Stint)
 - Für Gesamtfahrzeiten für einen Fahrer bei einem Rennen gibt es ein Minimum.
