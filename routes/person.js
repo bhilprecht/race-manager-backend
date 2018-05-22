@@ -2,13 +2,12 @@
 var mongoose = require('mongoose'),
     app = require('../index').app,
     Team = require("../models/team"),
-    randomColor = require('randomcolor'),
     Person = mongoose.model('Person', require("../models/person"));
 
 app.post('/team/:teamId/person', function(req, res){
 
-    if(!req.body.name)
-        return res.status(400).send({ message: 'Error: name is a mandatory field' });
+    if(!req.body.name || !req.body.color)
+        return res.status(400).send({ message: 'Error: name and color are mandatory fields' });
 
     Team.findById(req.params.teamId, function(err, team) {
         if (err || !team)
@@ -22,7 +21,7 @@ app.post('/team/:teamId/person', function(req, res){
         person.driver = req.body.driver;
         person.connectedViaDevice = req.body.connectedViaDevice;
         person.avatarNo = Math.floor(Math.random() * 8);
-        person.color = randomColor();
+        person.color = req.body.color;
 
         team.members.push(person);
 
