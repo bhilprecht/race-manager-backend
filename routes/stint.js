@@ -77,6 +77,11 @@ app.get('/team/:teamId/event/:eventId/stint', function(req, res){
 
         var stints = event.stints.toObject();
 
+        if (req.query.finished == 'true')
+            stints = stints.filter(function(stint){return stint.finished})
+        else if (req.query.finished == 'false')
+            stints = stints.filter(function(stint){return !stint.finished})
+
         //populate drivers
         async.forEach(stints,function(stint,callback) {
             console.log(stint)
