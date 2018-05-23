@@ -20,8 +20,8 @@ var EventSchema = new Schema({
         type: Number,
         required: true
     },
-    pictureNo: {
-        type: Number
+    picturePath: {
+        type: String
     },
     stints : [{type : Stint}]
 });

@@ -35,9 +35,7 @@ app.get('/team/:teamId/event/:eventId/driver_stats', function(req, res){
                 console.log(result_row)
                 result_row.driver = team.members.id(result_row._id)
                 result_row._id = undefined
-            }, function(err) {
-                return res.status(400).send(err);
-            });
+            }, function(err) {});
             res.json(result);
         });
     })

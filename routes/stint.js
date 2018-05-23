@@ -88,7 +88,7 @@ app.get('/team/:teamId/event/:eventId/stint', function(req, res){
             stint.driver = team.members.id(stint.driverId)
             stint.driverId = undefined
         }, function(err) {
-            return res.status(400).send(err);
+            //ignored
         });
         res.json(stints);
     });

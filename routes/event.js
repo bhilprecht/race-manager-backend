@@ -20,8 +20,8 @@ app.post('/team/:teamId/event', function(req, res){
         event.location = req.body.location;
         event.noRaceDays = req.body.noRaceDays;
 
-        if (req.body.pictureNo)
-            event.pictureNo = req.body.pictureNo
+        if (req.body.picturePath)
+            event.picturePath = req.body.picturePath
 
         team.events.push(event);
 
@@ -74,14 +74,11 @@ app.put('/team/:teamId/event/:eventId', function(req, res){
         if (!event)
             return res.status(400).send({message: 'Error: Person not found'});
 
-        if (req.body.pictureNo)
-            event.pictureNo = req.body.pictureNo
-
+        if (req.body.picturePath) { event.picturePath = req.body.picturePath }
         if(req.body.name) { event.name = req.body.name }
         if(req.body.startdate) { event.startdate = req.body.startdate }
         if(req.body.location) { event.location = req.body.location }
         if(req.body.noRaceDays) { event.noRaceDays = req.body.noRaceDays }
-        if(req.body.pictureNo) { event.pictureNo = req.body.pictureNo }
 
         team.save();   
         res.json(event);
