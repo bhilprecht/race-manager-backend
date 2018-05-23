@@ -9,6 +9,9 @@ app.post('/team/:teamId/person', function(req, res){
     if(!req.body.name || !req.body.color)
         return res.status(400).send({ message: 'Error: name and color are mandatory fields' });
 
+    if(req.body.driver && req.body.connectedViaDevice && !req.body.minutesBeforeNotification)
+        return res.status(400).send({ message: 'Error: minutesBeforeNotification is mandatory for drivers which are connected via their device' });
+
     Team.findById(req.params.teamId, function(err, team) {
         if (err || !team)
             return res.status(400).send({message: 'Error: Team not found'});
@@ -25,7 +28,6 @@ app.post('/team/:teamId/person', function(req, res){
 
         team.members.push(person);
 
-        // save the comment
         team.save(function(err) {
             if (err)
                 return res.status(400).send(err);
@@ -87,6 +89,11 @@ app.put('/team/:teamId/person/:personId', function(req, res){
 
         if (!person)
             return res.status(400).send({message: 'Error: Person not found'});
+
+        if(req.body.driver && !person.driver &&
+            (req.body.connectedViaDevice || person.connectedViaDevice) && 
+            !req.body.minutesBeforeNotification)
+            return res.status(400).send({ message: 'Error: minutesBeforeNotification is mandatory for drivers which are connected via their device' });
 
         if(req.body.name) { person.name = req.body.name }
         if(req.body.minutesBeforeNotification) { person.minutesBeforeNotification = req.body.minutesBeforeNotification }
