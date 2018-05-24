@@ -103,8 +103,12 @@ app.put('/team/:teamId/person/:personId', function(req, res){
         if(req.body.color) { person.color = req.body.color }
         if(req.body.avatarNo) { person.avatarNo = req.body.avatarNo }
 
-        team.save();   
+        team.save(function(err) {
+            if (err)
+                return res.status(400).send(err);
+            res.json(person);
+        });  
 
-        res.json(person);         
+        //res.json(person);         
     });
 });
