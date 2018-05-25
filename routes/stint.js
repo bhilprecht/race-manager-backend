@@ -6,10 +6,18 @@ var mongoose = require('mongoose'),
     Person = mongoose.model('Person', require("../models/person")),
     async = require("async");
 
+var correctOrderNos = function(stints) {
+    for(var i=0;i<stints.length;i++){
+        stint = stints[i];
+        stint.orderNo = i+1;
+    }
+    return stints;
+}
+
 app.post('/team/:teamId/event/:eventId/stint', function(req, res){
 
-    if(!req.body.orderNo)
-        return res.status(400).send({ message: 'Error: orderNo is mandatory field' });
+    if(req.body.orderNo)
+        return res.status(400).send({ message: 'Error: orderNo is calculated automatically. By default stint is last stint.' });
 
     Team.findById(req.params.teamId, function(err, team) {
         if (err || !team)
@@ -21,7 +29,6 @@ app.post('/team/:teamId/event/:eventId/stint', function(req, res){
 
         var stint = new Stint();
 
-        stint.orderNo = req.body.orderNo;
         if (req.body.finished != undefined) { stint.finished = req.body.finished }
         if (req.body.isBreak != undefined) { stint.isBreak = req.body.isBreak }
         if (req.body.driverId) {stint.driverId = req.body.driverId }
@@ -29,9 +36,11 @@ app.post('/team/:teamId/event/:eventId/stint', function(req, res){
         if (req.body.startdate) {stint.startdate = req.body.startdate }
         if (req.body.enddate) {stint.enddate = req.body.enddate }
 
+        // by default, last position
+        stint.orderNo = event.stints.length + 1
+
         event.stints.push(stint);
 
-        // save the comment
         team.save(function(err) {
             if (err)
                 return res.status(400).send(err);
@@ -110,16 +119,19 @@ app.delete('/team/:teamId/event/:eventId/stint/:stintId', function(req, res){
             return res.status(400).send({message: 'Error: Stint not found'});
 
         stint.remove();
-        team.save();   
-        res.json({ message: 'deleted' });
+        //correct OrderNo
+        event.stints = correctOrderNos(event.stints);
+
+        team.save(function(err) {
+            if (err)
+                return res.status(400).send(err);
+                res.json({ message: 'deleted' });
+        });
     });
     
 });
 
 app.put('/team/:teamId/event/:eventId/stint/:stintId', function(req, res){
-
-    if(!req.body.orderNo)
-        return res.status(400).send({ message: 'Error: orderNo is mandatory field' });
 
     Team.findById(req.params.teamId, function(err, team) {
         if (err || !team)
@@ -133,7 +145,6 @@ app.put('/team/:teamId/event/:eventId/stint/:stintId', function(req, res){
         if (!stint)
             return res.status(400).send({message: 'Error: Stint not found'});
 
-        if (req.body.orderNo) { stint.orderNo = req.body.orderNo }
         if (req.body.finished != undefined) { stint.finished = req.body.finished }
         if (req.body.isBreak != undefined) { stint.isBreak = req.body.isBreak }
         if (req.body.driverId) {stint.driverId = req.body.driverId }
@@ -141,7 +152,30 @@ app.put('/team/:teamId/event/:eventId/stint/:stintId', function(req, res){
         if (req.body.startdate) {stint.startdate = req.body.startdate }
         if (req.body.enddate) {stint.enddate = req.body.enddate }
 
-        // save the comment
+        if (req.body.orderNo != undefined) { 
+
+            orderNo = parseInt(req.body.orderNo);
+            console.log(orderNo);
+            console.log(typeof orderNo);
+
+            //is desired position valid?
+            if (orderNo < 1)
+                return res.status(400).send({message: 'Error: Desired OrderNo cannot be smaller than 1.'});
+            if (orderNo > event.stints.length)
+                return res.status(400).send({message: 'Error: Desired OrderNo out of bounds.'});
+            
+            //move stint to desired position
+            fromIndex = event.stints.indexOf(stint);
+            toIndex = orderNo-1;
+
+            event.stints.splice(fromIndex, 1);
+            event.stints.splice(toIndex, 0, stint);
+            
+            //correct OrderNo
+            event.stints = correctOrderNos(event.stints);
+        }
+
+        // save stint
         team.save(function(err) {
             if (err)
                 return res.status(400).send(err);
