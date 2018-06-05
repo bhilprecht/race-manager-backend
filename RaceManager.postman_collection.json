@@ -391,6 +391,41 @@
 					"response": []
 				},
 				{
+					"name": "Get Events (Ordered)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:3000/team/5afc7dd2b9c87a41bc1e14b9/event?orderBy=startdate&limit=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"team",
+								"5afc7dd2b9c87a41bc1e14b9",
+								"event"
+							],
+							"query": [
+								{
+									"key": "orderBy",
+									"value": "startdate",
+									"equals": true
+								},
+								{
+									"key": "limit",
+									"value": "2",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
 					"name": "Delete Event",
 					"request": {
 						"method": "DELETE",
