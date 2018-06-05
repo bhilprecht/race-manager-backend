@@ -52,7 +52,14 @@ app.get('/team/:teamId/event', function(req, res){
         if (err || !team)
             return res.status(400).send({message: 'Error: Team not found'});
 
-        res.json(team.events);    
+        events = team.events;
+        if (req.query.orderBy == 'startdate') {
+            events.sort((e1, e2) => e2.startdate-e1.startdate)
+        }
+        if (req.query.limit) {
+            events = events.slice(0,req.query.limit)
+        }
+        res.json(events);
     });
 });
 
