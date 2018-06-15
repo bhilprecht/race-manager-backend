@@ -19,8 +19,9 @@ app.post('/team/:teamId/person', function(req, res){
         var person = new Person();
 
         person.name = req.body.name;
-        if (req.body.minutesBeforeNotification)
-            person.minutesBeforeNotification = req.body.minutesBeforeNotification
+        if (req.body.minutesBeforeNotification) { person.minutesBeforeNotification = req.body.minutesBeforeNotification }
+        if (req.body.weight) { person.weight = req.body.weight }
+
         person.driver = req.body.driver;
         person.connectedViaDevice = req.body.connectedViaDevice;
         person.avatarNo = Math.floor(Math.random() * 8);
@@ -102,6 +103,7 @@ app.put('/team/:teamId/person/:personId', function(req, res){
         if(req.body.connectedViaDevice != undefined) { person.connectedViaDevice = req.body.connectedViaDevice }
         if(req.body.color) { person.color = req.body.color }
         if(req.body.avatarNo) { person.avatarNo = req.body.avatarNo }
+        if (req.body.weight) { person.weight = req.body.weight }
 
         team.save(function(err) {
             if (err)
