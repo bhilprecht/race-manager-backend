@@ -20,8 +20,11 @@ app.post('/team/:teamId/event', function(req, res){
         event.location = req.body.location;
         event.noRaceDays = req.body.noRaceDays;
 
-        if (req.body.picturePath)
-            event.picturePath = req.body.picturePath
+        if (req.body.kartWeightWithFuel) { event.kartWeightWithFuel = req.body.kartWeightWithFuel }
+        if (req.body.kartWeightWithoutFuel) { event.kartWeightWithoutFuel = req.body.kartWeightWithoutFuel }
+
+        if (req.body.picturePath) { event.picturePath = req.body.picturePath }
+            
 
         team.events.push(event);
 
@@ -80,6 +83,9 @@ app.put('/team/:teamId/event/:eventId', function(req, res){
         event = team.events.id(req.params.eventId)
         if (!event)
             return res.status(400).send({message: 'Error: Person not found'});
+
+        if (req.body.kartWeightWithFuel) { event.kartWeightWithFuel = req.body.kartWeightWithFuel }
+        if (req.body.kartWeightWithoutFuel) { event.kartWeightWithoutFuel = req.body.kartWeightWithoutFuel }
 
         if (req.body.picturePath) { event.picturePath = req.body.picturePath }
         if(req.body.name) { event.name = req.body.name }
