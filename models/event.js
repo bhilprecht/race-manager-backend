@@ -23,6 +23,12 @@ var EventSchema = new Schema({
     picturePath: {
         type: String
     },
+    kartWeightWithFuel: {
+        type: Number
+    },
+    kartWeightWithoutFuel: {
+        type: Number
+    },
     stints : [{type : Stint}]
 });
 

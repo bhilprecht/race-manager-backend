@@ -28,6 +28,9 @@ var PersonSchema = new Schema({
     avatarNo: {
         type: Number,
         required: true
+    },
+    weight: {
+       type: Number 
     }
 });
 
