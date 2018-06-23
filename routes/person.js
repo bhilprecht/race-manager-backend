@@ -24,7 +24,7 @@ app.post('/team/:teamId/person', function(req, res){
 
         person.driver = req.body.driver;
         person.connectedViaDevice = req.body.connectedViaDevice;
-        person.avatarNo = Math.floor(Math.random() * 8);
+        person.avatarNo = req.body.avatarNo || Math.floor(Math.random() * 8);
         person.color = req.body.color;
 
         team.members.push(person);
