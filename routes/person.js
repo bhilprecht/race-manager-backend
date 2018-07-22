@@ -26,6 +26,7 @@ app.post('/team/:teamId/person', function(req, res){
         person.connectedViaDevice = req.body.connectedViaDevice;
         person.avatarNo = req.body.avatarNo || Math.floor(Math.random() * 8);
         person.color = req.body.color;
+        person.active = true;
 
         team.members.push(person);
 
@@ -62,6 +63,11 @@ app.get('/team/:teamId/person', function(req, res){
             members = members.filter(function(person){return person.driver})
         else if (req.query.driver == 'false')
             members = members.filter(function(person){return !person.driver})
+
+        if (req.query.active == 'true')
+            members = members.filter(function(person){return person.active})
+        else if (req.query.active == 'false')
+            members = members.filter(function(person){return !person.active})
 
         if (req.query.connectedViaDevice == 'true')
             members = members.filter(function(person){return person.connectedViaDevice})
@@ -104,6 +110,7 @@ app.put('/team/:teamId/person/:personId', function(req, res){
         if(req.body.color) { person.color = req.body.color }
         if(req.body.avatarNo) { person.avatarNo = req.body.avatarNo }
         if (req.body.weight) { person.weight = req.body.weight }
+        if (req.body.active) { person.active = req.body.active }
 
         team.save(function(err) {
             if (err)
