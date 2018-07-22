@@ -110,7 +110,7 @@ app.put('/team/:teamId/person/:personId', function(req, res){
         if(req.body.color) { person.color = req.body.color }
         if(req.body.avatarNo) { person.avatarNo = req.body.avatarNo }
         if (req.body.weight) { person.weight = req.body.weight }
-        if (req.body.active) { person.active = req.body.active }
+        if (req.body.active != undefined) { person.active = req.body.active }
 
         team.save(function(err) {
             if (err)
