@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var CronJob = require('cron').CronJob;
-var notificationRoutine = require('./modules/notificationRoutine');
+var notificationRoutine = require('./libs/notificationRoutine');
 
 var app = express();
 module.exports.app = app;
