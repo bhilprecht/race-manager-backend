@@ -1,6 +1,8 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var CronJob = require('cron').CronJob;
+var notificationRoutine = require('./modules/notificationRoutine');
 
 var app = express();
 module.exports.app = app;
@@ -28,6 +30,13 @@ require('./routes/person');
 require('./routes/event');
 require('./routes/stint');
 require('./routes/statistics');
+
+//Job runs every minute
+new CronJob('0 * * * * *', function() {
+    notificationRoutine();
+    console.log('notificationRoutine() executed');
+}, null, true, 'America/Los_Angeles');
+notificationRoutine();
 
 app.listen(process.env.PORT || 3000, function(){
     console.log('Listening on port 3000!');

@@ -1,9 +1,7 @@
 var mongoose = require('mongoose'),
     app = require('../index').app,
     Team = require("../models/team"),
-    Event = mongoose.model('Event', require("../models/event")),
     Stint = mongoose.model('Stint', require("../models/stint")),
-    Person = mongoose.model('Person', require("../models/person")),
     async = require("async");
 
 var correctOrderNos = function(stints) {
@@ -12,6 +10,14 @@ var correctOrderNos = function(stints) {
         stint.orderNo = i+1;
     }
     return stints;
+}
+
+var computeNotificationTime = function(stint, team) {
+    var driver = team.members.id(stint.driverId)
+    var minutesBeforeNotification = 10 //Default
+    if (driver)
+        minutesBeforeNotification = driver.minutesBeforeNotification
+    return new Date(stint.startdate.getTime() - minutesBeforeNotification*60000)
 }
 
 app.post('/team/:teamId/event/:eventId/stint', function(req, res){
@@ -35,7 +41,11 @@ app.post('/team/:teamId/event/:eventId/stint', function(req, res){
         if (req.body.raceDay) {stint.raceDay = req.body.raceDay }
         if (req.body.startdate) {stint.startdate = req.body.startdate }
         if (req.body.enddate) {stint.enddate = req.body.enddate }
+        if (req.body.tags) {stint.tags = req.body.tags }
 
+        stint.notified = false
+        stint.notificationTime = computeNotificationTime(stint, team)
+       
         // by default, last position
         stint.orderNo = event.stints.length + 1
 
@@ -147,10 +157,19 @@ app.put('/team/:teamId/event/:eventId/stint/:stintId', function(req, res){
 
         if (req.body.finished != undefined) { stint.finished = req.body.finished }
         if (req.body.isBreak != undefined) { stint.isBreak = req.body.isBreak }
-        if (req.body.driverId) {stint.driverId = req.body.driverId }
+        if (req.body.driverId && req.body.driverId != stint.driverId) {
+            stint.driverId = req.body.driverId 
+            stint.notified = false //if you change the driver, notification should be renewed
+        }
         if (req.body.raceDay) {stint.raceDay = req.body.raceDay }
-        if (req.body.startdate) {stint.startdate = req.body.startdate }
+        if (req.body.startdate && req.body.startdate != stint.startdate) {
+            stint.notificationTime = computeNotificationTime(stint, team)
+            stint.startdate = req.body.startdate
+            stint.notified = false //if you change the time, notification should be renewed
+        }
         if (req.body.enddate) {stint.enddate = req.body.enddate }
+        if (req.body.notified  != undefined) {stint.notified = req.body.notified }
+        if (req.body.tags) {stint.tags = req.body.tags }
 
         if (req.body.orderNo != undefined) { 
 
