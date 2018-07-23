@@ -158,6 +158,7 @@ app.put('/team/:teamId/event/:eventId/stint/:stintId', function(req, res){
         if (req.body.finished != undefined) { stint.finished = req.body.finished }
         if (req.body.isBreak != undefined) { stint.isBreak = req.body.isBreak }
         if (req.body.driverId && req.body.driverId != stint.driverId) {
+            stint.notificationTime = computeNotificationTime(stint, team)
             stint.driverId = req.body.driverId 
             stint.notified = false //if you change the driver, notification should be renewed
         }
