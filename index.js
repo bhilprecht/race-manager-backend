@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var CronJob = require('cron').CronJob;
 var notificationRoutine = require('./libs/notificationRoutine');
+var requestValidation = require('./libs/requestValidation');
 
 var app = express();
 module.exports.app = app;
@@ -17,6 +18,12 @@ app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
   next();
 });
+
+// middleware to validate request
+app.use('/team/:teamId', requestValidation.checkTeam);
+// memberId not required if post against person because might not be available
+app.post('/team/:teamId/person', requestValidation.checkMemberIdRequired) 
+app.use('/team/:teamId', requestValidation.checkMember);
 
 mongoUrl = process.env.MONGODB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost:27017';
 
@@ -36,7 +43,6 @@ new CronJob('0 * * * * *', function() {
     notificationRoutine();
     //console.log('notificationRoutine() executed');
 }, null, true, 'America/Los_Angeles');
-notificationRoutine();
 
 app.listen(process.env.PORT || 3000, function(){
     console.log('Listening on port 3000!');
