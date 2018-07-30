@@ -34,7 +34,7 @@ require('./routes/statistics');
 //Job runs every minute
 new CronJob('0 * * * * *', function() {
     notificationRoutine();
-    console.log('notificationRoutine() executed');
+    //console.log('notificationRoutine() executed');
 }, null, true, 'America/Los_Angeles');
 notificationRoutine();
 
