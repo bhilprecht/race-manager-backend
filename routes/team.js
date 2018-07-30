@@ -1,6 +1,5 @@
 
-var mongoose = require('mongoose'),
-    app = require('../index').app,
+var app = require('../index').app,
     Team = require("../models/team");
 
 app.get('/team', function(req, res){
