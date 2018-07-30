@@ -21,8 +21,12 @@ app.use(function(req, res, next) {
 
 // middleware to validate request
 app.use('/team/:teamId', requestValidation.checkTeam);
+
 // memberId not required if post against person because might not be available
-app.post('/team/:teamId/person', requestValidation.checkMemberIdRequired) 
+app.post('/team/:teamId/person', requestValidation.teamMemberIdNotRequired)
+app.use(requestValidation.checkMemberIdRequired)
+
+//check if memberId is valid if required
 app.use('/team/:teamId', requestValidation.checkMember);
 
 mongoUrl = process.env.MONGODB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost:27017';

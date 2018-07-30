@@ -15,6 +15,13 @@ module.exports.checkTeam = function (req, res, next) {
 
 // we do not require team member id if user is created because he might not have one
 module.exports.checkMemberIdRequired = function(req, res, next) {
+    if (req.method == 'OPTIONS')
+        req.teamMemberIdNotRequired = true;
+    next();
+}
+
+// we do not require team member id if user is created because he might not have one
+module.exports.teamMemberIdNotRequired = function(req, res, next) {
     req.teamMemberIdNotRequired = true;
     next();
 }
