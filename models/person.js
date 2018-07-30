@@ -13,6 +13,10 @@ var PersonSchema = new Schema({
     notificationId: {
         type: String
     },
+    active: {
+        type: Boolean,
+        required: true
+    },
     driver: {
         type: Boolean,
         required: true

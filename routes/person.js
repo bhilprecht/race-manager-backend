@@ -6,10 +6,10 @@ var mongoose = require('mongoose'),
 
 app.post('/team/:teamId/person', function(req, res){
 
-    if(!req.body.name || !req.body.color)
+    if (!req.body.name || !req.body.color)
         return res.status(400).send({ message: 'Error: name and color are mandatory fields' });
 
-    if(req.body.driver && req.body.connectedViaDevice && !req.body.minutesBeforeNotification)
+    if (req.body.driver && req.body.connectedViaDevice && !req.body.minutesBeforeNotification)
         return res.status(400).send({ message: 'Error: minutesBeforeNotification is mandatory for drivers which are connected via their device' });
 
     Team.findById(req.params.teamId, function(err, team) {
@@ -26,6 +26,7 @@ app.post('/team/:teamId/person', function(req, res){
         person.connectedViaDevice = req.body.connectedViaDevice;
         person.avatarNo = req.body.avatarNo || Math.floor(Math.random() * 8);
         person.color = req.body.color;
+        person.active = true;
 
         team.members.push(person);
 
@@ -63,6 +64,11 @@ app.get('/team/:teamId/person', function(req, res){
         else if (req.query.driver == 'false')
             members = members.filter(function(person){return !person.driver})
 
+        if (req.query.active == 'true')
+            members = members.filter(function(person){return person.active})
+        else if (req.query.active == 'false')
+            members = members.filter(function(person){return !person.active})
+
         if (req.query.connectedViaDevice == 'true')
             members = members.filter(function(person){return person.connectedViaDevice})
         else if (req.query.connectedViaDevice == 'false')
@@ -96,14 +102,15 @@ app.put('/team/:teamId/person/:personId', function(req, res){
             !req.body.minutesBeforeNotification)
             return res.status(400).send({ message: 'Error: minutesBeforeNotification is mandatory for drivers which are connected via their device' });
 
-        if(req.body.name) { person.name = req.body.name }
-        if(req.body.minutesBeforeNotification) { person.minutesBeforeNotification = req.body.minutesBeforeNotification }
-        if(req.body.notificationId) { person.notificationId = req.body.notificationId }
-        if(req.body.driver != undefined) { person.driver = req.body.driver }
-        if(req.body.connectedViaDevice != undefined) { person.connectedViaDevice = req.body.connectedViaDevice }
-        if(req.body.color) { person.color = req.body.color }
-        if(req.body.avatarNo) { person.avatarNo = req.body.avatarNo }
+        if (req.body.name) { person.name = req.body.name }
+        if (req.body.minutesBeforeNotification) { person.minutesBeforeNotification = req.body.minutesBeforeNotification }
+        if (req.body.notificationId) { person.notificationId = req.body.notificationId }
+        if (req.body.driver != undefined) { person.driver = req.body.driver }
+        if (req.body.connectedViaDevice != undefined) { person.connectedViaDevice = req.body.connectedViaDevice }
+        if (req.body.color) { person.color = req.body.color }
+        if (req.body.avatarNo) { person.avatarNo = req.body.avatarNo }
         if (req.body.weight) { person.weight = req.body.weight }
+        if (req.body.active != undefined) { person.active = req.body.active }
 
         team.save(function(err) {
             if (err)

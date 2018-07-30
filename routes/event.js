@@ -1,4 +1,3 @@
-
 var mongoose = require('mongoose'),
     app = require('../index').app,
     Team = require("../models/team"),

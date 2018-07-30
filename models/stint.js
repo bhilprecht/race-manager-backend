@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var Person = require('./person');
 
 var StintSchema = new Schema({
     finished : {
@@ -28,8 +27,17 @@ var StintSchema = new Schema({
     },
     enddate : {
         type : Date
-    }
-    //TODO: Tags
+    }, 
+    notified : {
+        type : Boolean,
+        default: false
+    },
+    notificationTime : {
+        type : Date
+    },
+    tags: [{
+        type: String
+    }]
 });
 
 module.exports = StintSchema;
