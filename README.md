@@ -2,6 +2,20 @@
 
 Backend for [Racemanager](https://github.com/benni1371/mobileProjectDHBW) application.
 
+## Introduction
+It provides functionality to 
+- manage teams, members, events, stints
+- notify drivers
+- persist the data with mongoDB
+- calculate statistics for the drivers
+
+Currently the server is not production-ready. We postponed:
+
+- authentication and authorization 
+- logging
+- automatic tests
+
+## Deployment
 To start, clone the repository and type
 ```
 npm install
@@ -19,10 +33,12 @@ Optionally, you can also provide
 - MONGODB_URI.
 Otherwise the standard MongoDB uri is used. 
 
-For every request targeting a specific team you have to provide the custom header X-Team-Member-Id with a valid team member id. 
+For every request targeting a specific team you have to provide the custom header X-Team-Member-Id with a valid team member id.
 
-Currently the server is not production-ready. We postponed:
+## Plugins 
 
-- Authentication and Authorization 
-- Logging
-- Automatic tests
+We used 
+- cron: for periodic job scheduling
+- express: for server functionality
+- mongoose: for mongo db connection
+- onesignal-node: for connection to OneSignal for notifications
