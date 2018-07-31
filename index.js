@@ -13,7 +13,7 @@ mongoose.Promise = global.Promise;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors);
-require('./libs/validationMiddleware');
+require('./libs/validationMiddleware');  
 
 // connect to mongo database
 mongoUrl = process.env.MONGODB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost:27017';

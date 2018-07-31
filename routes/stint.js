@@ -15,10 +15,19 @@ var correctOrderNos = function(stints) {
 
 var computeNotificationTime = function(stint, team) {
     var driver = team.members.id(stint.driverId)
-    var minutesBeforeNotification = 10 //Default
+    var minutesBeforeNotification = 30 //Default
     if (driver)
-        minutesBeforeNotification = driver.minutesBeforeNotification
+        minutesBeforeNotification = driver.minutesBeforeNotification || minutesBeforeNotification //Default
     return new Date(stint.startdate.getTime() - minutesBeforeNotification*60000)
+}
+
+var extractNotificationIds = function(members) {
+    notificationIds = [];
+    members.forEach(function(member) {
+        if(member.active && member.notificationId)
+            notificationIds.push(member.notificationId)
+    });
+    return notificationIds;
 }
 
 app.post('/team/:teamId/event/:eventId/stint', function(req, res){
@@ -57,7 +66,7 @@ app.post('/team/:teamId/event/:eventId/stint', function(req, res){
                 return res.status(400).send(err);
 
             //notify team
-            notificationSender.notifyTeam(team._id);
+            notificationSender.notifyTeam(extractNotificationIds(team.members), event);
 
             res.json(stint);
         });
@@ -142,7 +151,7 @@ app.delete('/team/:teamId/event/:eventId/stint/:stintId', function(req, res){
                 return res.status(400).send(err);
             
             //notify team
-            notificationSender.notifyTeam(team._id);
+            notificationSender.notifyTeam(extractNotificationIds(team.members), event);
 
             res.json({ message: 'deleted' });
         });
@@ -210,7 +219,7 @@ app.put('/team/:teamId/event/:eventId/stint/:stintId', function(req, res){
                 return res.status(400).send(err);
 
             //notify team
-            notificationSender.notifyTeam(team._id);
+            notificationSender.notifyTeam(extractNotificationIds(team.members), event);
             
             res.json(stint);
         });
