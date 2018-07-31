@@ -21,6 +21,7 @@ app.post('/team/:teamId/person', function(req, res){
         person.name = req.body.name;
         if (req.body.minutesBeforeNotification) { person.minutesBeforeNotification = req.body.minutesBeforeNotification }
         if (req.body.weight) { person.weight = req.body.weight }
+        if (req.body.notificationId) { person.notificationId = req.body.notificationId }
 
         person.driver = req.body.driver;
         person.connectedViaDevice = req.body.connectedViaDevice;

@@ -1,5 +1,6 @@
 var Team = require("../models/team"),
-    async = require("async");
+    async = require("async"),
+    notificationSender = require("./notificationSender");
 
 var notify = function(result_row) {
     //populate driver
@@ -12,8 +13,8 @@ var notify = function(result_row) {
         console.log("Could not notify " + result_row.driver.name)
     } else {
         //do notify
-        //TODO: implement with OneSignal
-        console.log("I have to notify " + result_row.driver.name + " with Device " + result_row.driver.notificationId)   
+        console.log("notifyDriver")
+        notificationSender.notifyDriver(result_row.driver.notificationId, result_row._id, result_row.events._id, result_row.events.stints.startdate) 
     }
     //set notified = true
     Team.findById(result_row._id, function(err, team) {

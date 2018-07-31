@@ -2,7 +2,8 @@ var mongoose = require('mongoose'),
     app = require('../index').app,
     Team = require("../models/team"),
     Stint = mongoose.model('Stint', require("../models/stint")),
-    async = require("async");
+    async = require("async"),
+    notificationSender = require("../libs/notificationSender");
 
 var correctOrderNos = function(stints) {
     for(var i=0;i<stints.length;i++){
@@ -54,6 +55,10 @@ app.post('/team/:teamId/event/:eventId/stint', function(req, res){
         team.save(function(err) {
             if (err)
                 return res.status(400).send(err);
+
+            //notify team
+            notificationSender.notifyTeam(team._id);
+
             res.json(stint);
         });
     });
@@ -135,7 +140,11 @@ app.delete('/team/:teamId/event/:eventId/stint/:stintId', function(req, res){
         team.save(function(err) {
             if (err)
                 return res.status(400).send(err);
-                res.json({ message: 'deleted' });
+            
+            //notify team
+            notificationSender.notifyTeam(team._id);
+
+            res.json({ message: 'deleted' });
         });
     });
     
@@ -199,6 +208,10 @@ app.put('/team/:teamId/event/:eventId/stint/:stintId', function(req, res){
         team.save(function(err) {
             if (err)
                 return res.status(400).send(err);
+
+            //notify team
+            notificationSender.notifyTeam(team._id);
+            
             res.json(stint);
         });
     });

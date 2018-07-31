@@ -33,6 +33,7 @@ require('./routes/statistics');
 new CronJob('0 * * * * *', function() {
     notificationRoutine();
 }, null, true, 'America/Los_Angeles');
+notificationRoutine();
 
 // start server
 app.listen(process.env.PORT || 3000, function(){
