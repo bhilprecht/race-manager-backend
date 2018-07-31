@@ -1,8 +1,9 @@
-var constants = require('./constants'),
-    Team = require("../models/team");
+var app = require('../index').app,
+    Team = require("../models/team"),
+    constants = require("./constants");
 
-// check that team exists
-module.exports.checkTeam = function (req, res, next) {
+// middleware to validate correct teamId
+app.use('/team/:teamId', function (req, res, next) {
     Team.findById(req.params.teamId, function(err, team) {
         
         if (err || !team)
@@ -11,23 +12,24 @@ module.exports.checkTeam = function (req, res, next) {
         req.team = team
         next();
     });
-}
+});
 
-// we do not require team member id if user is created because he might not have one
-module.exports.checkMemberIdRequired = function(req, res, next) {
+// memberId not required if post against person because might not be available
+app.post('/team/:teamId/person', function(req, res, next) {
+    req.teamMemberIdNotRequired = true;
+    next();
+})
+
+//Options is always allowed
+app.use(function(req, res, next) {
     if (req.method == 'OPTIONS')
         req.teamMemberIdNotRequired = true;
     next();
-}
-
-// we do not require team member id if user is created because he might not have one
-module.exports.teamMemberIdNotRequired = function(req, res, next) {
-    req.teamMemberIdNotRequired = true;
-    next();
-}
+});
 
 // Todo: security: check that member belongs to team or is admin
-module.exports.checkMember = function (req, res, next) {
+//check if memberId is valid if required
+app.use('/team/:teamId', function (req, res, next) {
     //check if member id is required
     if(req.teamMemberIdNotRequired) {
         return next()
@@ -46,6 +48,4 @@ module.exports.checkMember = function (req, res, next) {
         return res.status(400).send({message: 'MemberId is not active'});
     }    
     next();
-}
-
-    
+});
