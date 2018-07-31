@@ -1,9 +1,6 @@
 var mongoose = require('mongoose'),
     app = require('../index').app,
     Team = require("../models/team"),
-    Event = mongoose.model('Event', require("../models/event")),
-    Stint = mongoose.model('Stint', require("../models/stint")),
-    Person = mongoose.model('Person', require("../models/person")),
     async = require("async");
 
 app.get('/team/:teamId/event/:eventId/driver_stats', function(req, res){
