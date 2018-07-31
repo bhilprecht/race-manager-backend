@@ -6,6 +6,9 @@ var mongoose = require('mongoose'),
 
 app.post('/team/:teamId/person', function(req, res){
 
+    if (req.body.driver == undefined)
+        return res.status(400).send({ message: 'Error: driver is a mandatory field' });
+
     if (!req.body.name || !req.body.color)
         return res.status(400).send({ message: 'Error: name and color are mandatory fields' });
 
@@ -19,7 +22,7 @@ app.post('/team/:teamId/person', function(req, res){
         var person = new Person();
 
         person.name = req.body.name;
-        if (req.body.minutesBeforeNotification) { person.minutesBeforeNotification = req.body.minutesBeforeNotification }
+        person.minutesBeforeNotification = req.body.minutesBeforeNotification || 30
         if (req.body.weight) { person.weight = req.body.weight }
         if (req.body.notificationId) { person.notificationId = req.body.notificationId }
 
@@ -34,6 +37,7 @@ app.post('/team/:teamId/person', function(req, res){
         team.save(function(err) {
             if (err)
                 return res.status(400).send(err);
+
             res.json(person);
         });
     });

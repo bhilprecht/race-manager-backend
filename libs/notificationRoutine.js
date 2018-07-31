@@ -13,7 +13,6 @@ var notify = function(result_row) {
         console.log("Could not notify " + result_row.driver.name)
     } else {
         //do notify
-        console.log("notifyDriver")
         notificationSender.notifyDriver(result_row.driver.notificationId, result_row._id, result_row.events._id, result_row.events.stints.startdate) 
     }
     //set notified = true
